@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'MenuIcon',
+  name: "MenuIcon",
   props: {
     dt: Object,
   },
@@ -28,11 +28,11 @@ export default {
     return {
       data: this.dt,
       cols: [
-        'linear-gradient(90deg,rgba(63, 94, 251, 1) 0%,rgba(252, 70, 107, 1) 90%)',
-        'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 90%)',
-        'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,79,121,1) 35%, rgba(0,212,255,1) 90%)',
-        'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 90%)',
-        'radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 90%)',
+        "linear-gradient(90deg,rgba(63, 94, 251, 1) 0%,rgba(252, 70, 107, 1) 90%)",
+        "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 90%)",
+        "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,79,121,1) 35%, rgba(0,212,255,1) 90%)",
+        "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 90%)",
+        "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 90%)",
       ],
     };
   },
@@ -44,8 +44,7 @@ export default {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     },
     colorPicker() {
-      let random = this.getRandomInt(0, this.cols.length - 1);
-      console.log(random);
+      // let random = this.getRandomInt(0, this.cols.length - 1);
       return this.cols[4];
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="a-nav row">
-    <div class="col-8">
+    <div class="col-10">
       <div class="a-logo">
         <router-link
           ref="link"
@@ -19,8 +19,31 @@
           </div>
         </router-link>
       </div>
+      <div class="breadcrumbs" v-if="home">
+        <span class="material-icons-outlined arrows">
+          chevron_right
+        </span>
+        <div>
+          {{ name }}
+        </div>
+      </div>
     </div>
-    <div class="col-3"></div>
+    <div class="col-1">
+      <div
+        class="row"
+        style="position:relative; width:100%; height: 100%; text-align:center;"
+      >
+        <div class="col">
+          <span
+            title="Go Back"
+            @click="$router.go(-1)"
+            :class="`material-icons-outlined bell clickable ${effect}`"
+          >
+            arrow_back_ios
+          </span>
+        </div>
+      </div>
+    </div>
     <div class="col-1">
       <div
         class="row"
@@ -41,19 +64,38 @@
 
 <script>
 export default {
+  props: {},
   data() {
     return {
-      effect: '',
+      effect: "",
       show: false,
       notifSHow: false,
+      home: false,
       featuresOpen: false,
+      redirect: "",
+      name: "",
     };
+  },
+  watch: {
+    $route(to) {
+      const toPage = to;
+      document.title = toPage.name + " | HRMS";
+      const path = toPage.path;
+      if (path !== "/") {
+        this.home = true;
+      } else {
+        this.home = false;
+      }
+      const name_ = toPage.name;
+      this.redirect = path;
+      this.name = name_;
+    },
   },
   methods: {
     createRipple(e) {
-      e.target.classList.add('ripple');
+      e.target.classList.add("ripple");
       setTimeout(() => {
-        e.target.classList.remove('ripple');
+        e.target.classList.remove("ripple");
       }, 100);
     },
   },
@@ -69,6 +111,7 @@ export default {
   height: 60px;
   background-color: #fff;
   box-shadow: 0 0 5px 0 grey;
+  z-index: 9999;
 }
 .a-nav .a-logo {
   position: relative;
@@ -97,8 +140,29 @@ export default {
   user-select: none;
   cursor: pointer;
 }
-.clickable:hover {
+.breadcrumbs {
+  display: inline-flex;
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
 }
+.breadcrumbs > span {
+  position: relative;
+  font-size: 42px;
+  padding: 9px;
+  margin-left: 15px;
+  color: gray;
+}
+.breadcrumbs > div {
+  padding: 15px;
+  /* font-style: italic; */
+  color: gray;
+  font-size: 21px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 .ripple {
   /* position: absolute; The absolute position we mentioned earlier */
   border-radius: 50%;

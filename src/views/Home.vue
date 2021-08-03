@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import MenuIcon from '@/components/Icon';
+import MenuIcon from "@/components/Icon";
 
 export default {
-  title: 'Home | HRMS',
+  title: "Home | HRMS",
   components: {
     MenuIcon,
   },
@@ -16,28 +16,33 @@ export default {
     return {
       data: [
         {
-          path: '/leaves',
-          icon: 'event',
-          name: 'Leaves',
+          path: "/leaves",
+          icon: "event",
+          name: "Leaves",
           pop: false,
         },
-
         {
-          path: '/about',
-          icon: 'help',
-          name: 'About',
+          path: "/employee/new",
+          icon: "add",
+          name: "New Employee",
           pop: true,
         },
         {
-          path: '/notifications',
-          icon: 'notifications',
-          name: 'Notifications',
+          path: "/employees",
+          icon: "people",
+          name: "Employee Management",
           pop: true,
         },
         {
-          path: '/settings',
-          icon: 'settings',
-          name: 'Settings',
+          path: "/notifications",
+          icon: "notifications",
+          name: "Notifications",
+          pop: true,
+        },
+        {
+          path: "/settings",
+          icon: "settings",
+          name: "Settings",
           pop: false,
         },
       ],
