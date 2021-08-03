@@ -1,5 +1,5 @@
 <template>
-  <div class="a-nav row">
+  <div class="a-nav row" v-if="redirect !== '/login'">
     <div class="col-10">
       <div class="a-logo">
         <router-link
@@ -51,7 +51,7 @@
       >
         <div class="col">
           <span
-            @click="createRipple"
+            @click="logout"
             :class="`material-icons-outlined bell clickable ${effect}`"
           >
             power_settings_new
@@ -63,6 +63,8 @@
 </template>
 
 <script>
+const jwt = require("jsonwebtoken");
+
 export default {
   props: {},
   data() {
@@ -78,6 +80,7 @@ export default {
   },
   watch: {
     $route(to) {
+      const this_ = this;
       const toPage = to;
       document.title = toPage.name + " | HRMS";
       const path = toPage.path;
@@ -89,9 +92,25 @@ export default {
       const name_ = toPage.name;
       this.redirect = path;
       this.name = name_;
+      const token = sessionStorage.getItem("token");
+      if (token !== null) {
+        jwt.verify(token, "mysecrettoken", function(err, decoded) {
+          if (decoded !== undefined) {
+            if (path == "/login") {
+              this_.$router.push("/");
+            }
+          } else {
+            this_.$router.push("/login");
+          }
+        });
+      }
     },
   },
   methods: {
+    logout() {
+      sessionStorage.setItem("token", null);
+      this.$router.push("/login");
+    },
     createRipple(e) {
       e.target.classList.add("ripple");
       setTimeout(() => {
