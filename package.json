@@ -9,12 +9,16 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
+    "@shapla/vue-spinner": "^1.0.0",
+    "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "core-js": "^3.6.5",
+    "jsonwebtoken": "^8.5.1",
     "material-icons": "^1.0.1",
     "mosha-vue-toastify": "^1.0.17",
     "vue": "^3.0.0",
     "vue-router": "^4.0.10",
+    "vue3-editor": "^0.1.0-alpha.3",
     "webpack": "^4.42.0"
   },
   "devDependencies": {

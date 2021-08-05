@@ -19,25 +19,20 @@ export default {
           path: "/leaves",
           icon: "event",
           name: "Leaves",
-          pop: false,
-        },
-        {
-          path: "/employee/new",
-          icon: "add",
-          name: "New Employee",
           pop: true,
         },
-        {
-          path: "/employees",
-          icon: "people",
-          name: "Employee Management",
-          pop: true,
-        },
+
         {
           path: "/notifications",
           icon: "notifications",
           name: "Notifications",
           pop: true,
+        },
+        {
+          path: "/password/update",
+          icon: "lock",
+          name: "Password Change",
+          pop: false,
         },
         {
           path: "/settings",
@@ -47,6 +42,18 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    const role = sessionStorage.getItem("role");
+    if (role == "admin") {
+      const admin = {
+        path: "/admin",
+        icon: "admin_panel_settings",
+        name: "Admin Panel",
+        pop: false,
+      };
+      this.data.push(admin);
+    }
   },
 };
 </script>

@@ -197,18 +197,6 @@ export default {
   text-align: center;
   font-weight: 800;
 }
-.child-id {
-}
-.child-name {
-}
-.child-email {
-}
-.child-team {
-}
-.child-active {
-}
-.child-edit {
-}
 .clear {
   width: 45px !important;
   height: 45px;
