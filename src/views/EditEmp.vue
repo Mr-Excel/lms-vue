@@ -135,20 +135,20 @@
 
 <script>
 // import the library
-import { createToast } from "mosha-vue-toastify";
+import { createToast } from 'mosha-vue-toastify';
 // import the styling for the toast
-import "mosha-vue-toastify/dist/style.css";
+import 'mosha-vue-toastify/dist/style.css';
 export default {
   data() {
     return {
-      empId: "",
-      email: "",
-      gender: "",
-      name: "",
-      username: "",
-      team: "",
-      role: "",
-      designation: "",
+      empId: '',
+      email: '',
+      gender: '',
+      name: '',
+      username: '',
+      team: '',
+      role: '',
+      designation: '',
       isActive: true,
       isShow: false,
       active: false,
@@ -163,13 +163,13 @@ export default {
     async getDetail() {
       const dt = {
         id: 7,
-        name: "ahmad",
-        username: "ahmad.raza",
-        email: "ahmad.raza@sendoso.com",
-        team: "PLG",
-        gender: "Male",
-        role: "Employee",
-        designation: "Data ANA",
+        name: 'ahmad',
+        username: 'ahmad.raza',
+        email: 'ahmad.raza@sendoso.com',
+        team: 'PLG',
+        gender: 'Male',
+        role: 'Employee',
+        designation: 'Data ANA',
         isActive: 1,
       };
       this.email = dt.email;
@@ -182,36 +182,36 @@ export default {
       this.designation = dt.designation;
     },
     emailCompletion() {
-      this.username = this.username.replace("@", "");
-      const email = this.username + "@sendoso.com";
+      this.username = this.username.replace('@', '');
+      const email = this.username + '@sendoso.com';
       this.email = email;
     },
     submit() {
       this.active = true;
       if (
-        this.gender == "" ||
-        this.email == "" ||
-        this.name == "" ||
-        this.username == "" ||
-        this.team == "" ||
-        this.role == "" ||
-        this.designation == ""
+        this.gender == '' ||
+        this.email == '' ||
+        this.name == '' ||
+        this.username == '' ||
+        this.team == '' ||
+        this.role == '' ||
+        this.designation == ''
       ) {
-        createToast("Please Fill Out All Fields!", {
-          type: "danger",
-          position: "top-right",
+        createToast('Please Fill Out All Fields!', {
+          type: 'danger',
+          position: 'top-right',
           showIcon: true,
           timeout: 10000,
-          transition: "bounce",
+          transition: 'bounce',
         });
         this.active = false;
       } else {
-        createToast("Employee Saved", {
-          type: "success",
-          position: "top-right",
+        createToast('Employee Saved', {
+          type: 'success',
+          position: 'top-right',
           showIcon: true,
           timeout: 10000,
-          transition: "bounce",
+          transition: 'bounce',
         });
         this.active = false;
       }

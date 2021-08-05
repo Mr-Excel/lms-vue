@@ -1,52 +1,52 @@
-import Error from "@/views/Error";
-import Home from "@/views/Home";
-import NewEmp from "@/views/NewEmployee";
+import Error from '@/views/Error';
+import Home from '@/views/Home';
+import NewEmp from '@/views/NewEmployee';
 
-import Admin from "@/views/admin/Index";
+import Admin from '@/views/admin/Index';
 
-import Employees from "@/views/Employee";
-import EmpEdit from "@/views/EditEmp";
-import Password from "@/views/Password";
-import Login from "@/views/Login";
+import Employees from '@/views/Employee';
+import EmpEdit from '@/views/EditEmp';
+import Password from '@/views/Password';
+import Login from '@/views/Login';
 // Leaves Management
-import Leaves from "@/views/leaves/Index";
-import NewLeave from "@/views/leaves/New";
-import LeaveApplied from "@/views/leaves/Applied";
-import LeaveQouta from "@/views/leaves/Qouta";
-import LeaveSingle from "@/views/leaves/Single";
-import MoreLeaves from "@/views/leaves/More";
+import Leaves from '@/views/leaves/Index';
+import NewLeave from '@/views/leaves/New';
+import LeaveApplied from '@/views/leaves/Applied';
+import LeaveQouta from '@/views/leaves/qouta/Index';
+import LeaveSingle from '@/views/leaves/Single';
+import MoreLeaves from '@/views/leaves/More';
 
 export const routes = [
   // Page not found
-  { path: "/:pathMatch(.*)*", redirect: { name: "Error" } },
-  { path: "/exception", name: "Error", component: Error },
+  { path: '/:pathMatch(.*)*', redirect: { name: 'Error' } },
+  { path: '/exception', name: 'Error', component: Error },
   // Login Route
-  { path: "/", component: Home, name: "Home" },
+  { path: '/', component: Home, name: 'Home' },
   // Leaves Management
-  { path: "/admin", component: Admin, name: "Admin Panel" },
-  { path: "/leaves", component: Leaves, name: "Leave Management" },
-  { path: "/leaves/new", component: NewLeave, name: "Apply Leave" },
-  { path: "/leaves/applied", component: LeaveApplied, name: "Applied Leaves" },
-  { path: "/leaves/qouta", component: LeaveQouta, name: "Leaves Qouta" },
-  { path: "/leaves/single/:id", component: LeaveSingle, name: "Single Leave" },
+  { path: '/admin', component: Admin, name: 'Admin Panel' },
+  { path: '/leaves', component: Leaves, name: 'Leave Management' },
+  { path: '/leaves/new', component: NewLeave, name: 'Apply Leave' },
+  { path: '/leaves/applied', component: LeaveApplied, name: 'Applied Leaves' },
+  { path: '/leaves/qouta', component: LeaveQouta, name: 'Leaves Qouta' },
+  { path: '/leaves/single/:id', component: LeaveSingle, name: 'Single Leave' },
   {
-    path: "/leaves/qouta/more",
+    path: '/leaves/qouta/more',
     component: MoreLeaves,
-    name: "More Leave Request Form",
+    name: 'More Leave Request Form',
   },
 
   // admin Panel Routes
   {
-    path: "/admin/employees",
+    path: '/admin/employees',
     component: Employees,
-    name: "Employees Management",
+    name: 'Employees Management',
   },
-  { path: "/admin/employee/new", component: NewEmp, name: "Registration" },
+  { path: '/admin/employee/new', component: NewEmp, name: 'Registration' },
   {
-    path: "/admin/employee/edit/:id",
+    path: '/admin/employee/edit/:id',
     component: EmpEdit,
-    name: "Edit Employee",
+    name: 'Edit Employee',
   },
-  { path: "/password/update", component: Password, name: "Password Change" },
-  { path: "/login", component: Login, name: "Login" },
+  { path: '/password/update', component: Password, name: 'Password Change' },
+  { path: '/login', component: Login, name: 'Login' },
 ];

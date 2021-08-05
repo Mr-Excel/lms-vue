@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar";
+import NavBar from '@/components/NavBar';
 export default {
-  name: "App",
+  name: 'App',
   components: { NavBar },
 };
 </script>
@@ -83,5 +83,8 @@ a:hover {
   text-decoration: none;
   color: inherit;
 }
-@import "~bootstrap/dist/css/bootstrap.css";
+.center {
+  text-align: center !important;
+}
+@import '~bootstrap/dist/css/bootstrap.css';
 </style>
