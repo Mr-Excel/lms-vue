@@ -1,7 +1,21 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-9"></div>
+      <div class="col-9">
+        <div class="col">
+          Leave Id : <strong> {{ id }}</strong>
+        </div>
+        <div class="col">
+          Leave Status :
+          <strong style="color:red;" v-if="status == 'Rejected'">
+            {{ status }}</strong
+          >
+          <strong style="color:green;" v-else-if="status == 'Approved'">
+            {{ status }}</strong
+          >
+          <strong style="color:#f37021;" v-else> {{ status }}</strong>
+        </div>
+      </div>
       <div class="col-3" :class="remaining > 0 ? 'green' : 'red'">
         Remaining Leaves : <strong>{{ remaining }}</strong>
       </div>
@@ -18,6 +32,7 @@
               name="startDate"
               id="startDate"
               @input="endDateEnable"
+              :disabled="disabled == 0"
               placeholder="Select Starting Date"
             />
           </div>
@@ -55,7 +70,11 @@
         <div class="col">
           <div class="inputForm">
             <label for="reason">Reason</label>
-            <vue-editor id="reason" v-model="reason"></vue-editor>
+            <vue-editor
+              :disabled="disabled == 0"
+              id="reason"
+              v-model="reason"
+            ></vue-editor>
           </div>
         </div>
       </div>
@@ -64,7 +83,13 @@
         <div class="col">
           <div class="inputForm">
             <label for="em">Select Relative Manager</label>
-            <select name="em" id="em" v-model="em" @change="onSelect">
+            <select
+              :disabled="disabled == 0"
+              name="em"
+              id="em"
+              v-model="em"
+              @change="onSelect"
+            >
               <option value="0">----------</option>
               <option :value="i.email" v-for="i in emData" :key="i">{{
                 i.email
@@ -73,13 +98,20 @@
           </div>
         </div>
         <div class="col"></div>
-        <div class="col">
+        <div class="col" v-if="status == 'Pending'">
+          <button
+            class="btn btn-danger"
+            style="position:relative; float:right; margin-left:15px;"
+            @click="del"
+          >
+            Delete
+          </button>
           <button
             class="btn btn-secondary"
             style="position:relative; float:right;"
             @click="send"
           >
-            Send
+            Update
           </button>
         </div>
       </div>
@@ -109,13 +141,23 @@ export default {
   components: {
     VueEditor,
   },
+  mounted() {
+    this.get();
+    if (this.status == "Pending") {
+      this.disabled = 1;
+    } else {
+      this.disabled = 0;
+    }
+  },
   data() {
     return {
+      id: this.$route.params.id,
       startDate: "",
       endDate: "",
       totalDays: "",
-      disabled: 0,
-      remaining: 12,
+      disabled: "",
+      remaining: 0,
+      status: "",
       reason: "",
       em: "-------",
       emData: [
@@ -133,6 +175,23 @@ export default {
     };
   },
   methods: {
+    async get() {
+      const res = {
+        id: this.$route.params.id,
+        startDate: "2021-08-01",
+        endDate: "2021-08-07",
+        totalDays: 7,
+        reason: "No Reason",
+        em: "xyz@gmail.com",
+        status: "Pending",
+      };
+      this.startDate = res.startDate;
+      this.endDate = res.endDate;
+      this.totalDays = res.totalDays;
+      this.reason = res.reason;
+      this.status = res.status;
+      this.em = res.em;
+    },
     async send() {
       if (
         this.startDate &&

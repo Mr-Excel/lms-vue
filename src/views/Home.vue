@@ -21,18 +21,7 @@ export default {
           name: "Leaves",
           pop: true,
         },
-        {
-          path: "/employee/new",
-          icon: "person_add",
-          name: "New Employee",
-          pop: false,
-        },
-        {
-          path: "/employees",
-          icon: "people",
-          name: "Employee Management",
-          pop: false,
-        },
+
         {
           path: "/notifications",
           icon: "notifications",
@@ -53,6 +42,18 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    const role = sessionStorage.getItem("role");
+    if (role == "admin") {
+      const admin = {
+        path: "/admin",
+        icon: "admin_panel_settings",
+        name: "Admin Panel",
+        pop: false,
+      };
+      this.data.push(admin);
+    }
   },
 };
 </script>

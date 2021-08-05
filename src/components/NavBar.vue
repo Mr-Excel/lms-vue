@@ -76,6 +76,7 @@ export default {
       featuresOpen: false,
       redirect: "",
       name: "",
+      role: "",
     };
   },
   watch: {
@@ -94,8 +95,12 @@ export default {
       this.name = name_;
       const token = sessionStorage.getItem("token");
       if (token !== null) {
-        jwt.verify(token, "mysecrettoken", function(err, decoded) {
+        jwt.verify(token, process.env.VUE_APP_BE_JWT_SECRET, function(
+          err,
+          decoded
+        ) {
           if (decoded !== undefined) {
+            sessionStorage.setItem("role", decoded.user.role);
             if (path == "/login") {
               this_.$router.push("/");
             }
