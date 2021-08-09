@@ -36,7 +36,9 @@ export default {
       ],
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(this.dt);
+  },
   methods: {
     getRandomInt(min, max) {
       min = Math.ceil(min);

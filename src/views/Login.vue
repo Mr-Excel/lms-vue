@@ -73,6 +73,7 @@ export default {
         const res = await Login(this.email, this.pass);
         if (res.data.token !== undefined) {
           sessionStorage.setItem("token", res.data.token);
+          sessionStorage.setItem("reg_date", "2020-07-13");
           this.$router.push("/");
           createToast("Welcome Sendoso LMS", {
             type: "success",

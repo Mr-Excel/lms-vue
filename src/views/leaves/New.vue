@@ -72,7 +72,18 @@
             </select>
           </div>
         </div>
-        <div class="col"></div>
+        <div class="col">
+          <div class="inputForm">
+            <label for="leaveType">Select Leave Type</label>
+            <select name="leaveType" id="leaveType" v-model="leaveType">
+              <option value="0">----------</option>
+              <option value="Casual">Casual</option>
+              <option value="Sick">Sick</option>
+              <option value="Annual">Annual</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+        </div>
         <div class="col">
           <button
             class="btn btn-secondary"
@@ -115,6 +126,7 @@ export default {
       endDate: "",
       totalDays: "",
       disabled: 0,
+      leaveType: "",
       remaining: 12,
       reason: "",
       em: "-------",
@@ -139,6 +151,7 @@ export default {
         this.endDate &&
         this.totalDays > 0 &&
         this.em &&
+        this.leaveType &&
         this.reason
       ) {
         if (this.totalDays < this.remaining) {
