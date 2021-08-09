@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import MenuIcon from "@/components/Icon";
+import MenuIcon from '@/components/Icon';
 
 export default {
-  title: "Admin Panel | HRMS",
+  title: 'Admin Panel | HRMS',
   components: {
     MenuIcon,
   },
@@ -16,15 +16,21 @@ export default {
     return {
       data: [
         {
-          path: "/admin/employee/new",
-          icon: "person_add",
-          name: "New Employee",
+          path: '/admin/employee/new',
+          icon: 'person_add',
+          name: 'New Employee',
           pop: false,
         },
         {
-          path: "/admin/employees",
-          icon: "people",
-          name: "Employee Management",
+          path: '/admin/employees',
+          icon: 'people',
+          name: 'Employee Management',
+          pop: false,
+        },
+        {
+          path: '/admin/leaves',
+          icon: 'event',
+          name: 'Leave Requests',
           pop: false,
         },
       ],

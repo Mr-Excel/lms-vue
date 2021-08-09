@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div>
+    <div v-if="remainingLeaves <= 0">
       <div class="row">
         <div class="col">
           <div class="inputForm">
@@ -88,13 +88,27 @@
         </div>
       </div>
     </div>
+    <div class="row" v-else>
+      <div class="col" style="text-align: center;">
+        <strong>
+          You have Leaves Qouta Please Apply from New Section or Click
+          Below</strong
+        >
+        <br /><br />
+        <router-link to="/leaves/new">
+          <button class="btn btn-success">
+            Click Me
+          </button>
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { VueEditor } from "vue3-editor";
-import { createToast } from "mosha-vue-toastify";
-import "mosha-vue-toastify/dist/style.css";
+import { VueEditor } from 'vue3-editor';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 
 export default {
   components: {
@@ -102,22 +116,23 @@ export default {
   },
   data() {
     return {
-      startDate: "",
-      endDate: "",
-      totalDays: "",
+      remainingLeaves: 1,
+      startDate: '',
+      endDate: '',
+      totalDays: '',
       disabled: 0,
-      reason: "",
-      em: "-------",
+      reason: '',
+      em: '-------',
       emData: [
         {
           id: 1,
-          name: "Ahmad",
-          email: "xyz@gmail.com",
+          name: 'Ahmad',
+          email: 'xyz@gmail.com',
         },
         {
           id: 2,
-          name: "Raza",
-          email: "rz@gmail.com",
+          name: 'Raza',
+          email: 'rz@gmail.com',
         },
       ],
     };
@@ -131,20 +146,20 @@ export default {
         this.em &&
         this.reason
       ) {
-        createToast("Request Has Been Sent to EM!", {
-          type: "success",
-          position: "top-right",
+        createToast('Request Has Been Sent to EM!', {
+          type: 'success',
+          position: 'top-right',
           showIcon: true,
           timeout: 10000,
-          transition: "bounce",
+          transition: 'bounce',
         });
       } else {
-        createToast("All Fields are Required!!!", {
-          type: "danger",
-          position: "top-right",
+        createToast('All Fields are Required!!!', {
+          type: 'danger',
+          position: 'top-right',
           showIcon: true,
           timeout: 10000,
-          transition: "bounce",
+          transition: 'bounce',
         });
       }
     },
@@ -163,14 +178,14 @@ export default {
       if (diff > 0) {
         this.totalDays = diff;
       } else {
-        this.endDate = "";
-        this.totalDays = "";
-        createToast("Selected Date is Less Than Start Date", {
-          type: "danger",
-          position: "top-right",
+        this.endDate = '';
+        this.totalDays = '';
+        createToast('Selected Date is Less Than Start Date', {
+          type: 'danger',
+          position: 'top-right',
           showIcon: true,
           timeout: 10000,
-          transition: "bounce",
+          transition: 'bounce',
         });
       }
     },

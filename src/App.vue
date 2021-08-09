@@ -1,8 +1,10 @@
 <template>
-  <NavBar />
-  <main>
-    <router-view />
-  </main>
+  <div>
+    <NavBar />
+    <main>
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <script>
@@ -10,6 +12,37 @@ import NavBar from '@/components/NavBar';
 export default {
   name: 'App',
   components: { NavBar },
+  data() {
+    return {
+      ctrlDown: false,
+      ctrlKey: 17,
+      nKey: 78,
+      bksKey: 8,
+    };
+  },
+  created() {
+    document.onkeydown = this.historyBack;
+  },
+  methods: {
+    events(k) {
+      if (!this.ctrlDown) {
+        if (k == this.ctrlKey) {
+          this.ctrlDown = true;
+        } else if (k === 8) {
+          this.$router.go(-1);
+        }
+      } else {
+        if (k == this.nKey) {
+          this.$router.push('/leaves/new');
+        } else {
+          this.ctrlDown = false;
+        }
+      }
+    },
+    historyBack(e) {
+      this.events(e.keyCode);
+    },
+  },
 };
 </script>
 
@@ -39,6 +72,13 @@ main {
 }
 .inputForm label {
   margin-bottom: 5px;
+}
+.download {
+  position: relative;
+  width: 40px !important;
+  height: 40px;
+  padding: 7px;
+  float: right;
 }
 input {
   border: 1px solid lightgray;
@@ -85,6 +125,10 @@ a:hover {
 }
 .center {
   text-align: center !important;
+}
+.table-responsive {
+  overflow-x: auto;
+  overflow: hidden;
 }
 @import '~bootstrap/dist/css/bootstrap.css';
 </style>

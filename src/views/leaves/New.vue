@@ -99,7 +99,7 @@
       <div class="col" style="text-align: center;">
         <strong> You have No Remaining Leaves Contact your Manager</strong>
         <br /><br />
-        <router-link to="/leaves/qouta/more">
+        <router-link to="/leaves/qouta">
           <button class="btn btn-danger">
             Click Me
           </button>
@@ -111,10 +111,10 @@
 
 <script>
 // import the library
-import { VueEditor } from "vue3-editor";
-import { createToast } from "mosha-vue-toastify";
+import { VueEditor } from 'vue3-editor';
+import { createToast } from 'mosha-vue-toastify';
 // import the styling for the toast
-import "mosha-vue-toastify/dist/style.css";
+import 'mosha-vue-toastify/dist/style.css';
 
 export default {
   components: {
@@ -122,24 +122,24 @@ export default {
   },
   data() {
     return {
-      startDate: "",
-      endDate: "",
-      totalDays: "",
+      startDate: '',
+      endDate: '',
+      totalDays: '',
       disabled: 0,
-      leaveType: "",
+      leaveType: '',
       remaining: 12,
-      reason: "",
-      em: "-------",
+      reason: '',
+      em: '-------',
       emData: [
         {
           id: 1,
-          name: "Ahmad",
-          email: "xyz@gmail.com",
+          name: 'Ahmad',
+          email: 'xyz@gmail.com',
         },
         {
           id: 2,
-          name: "Raza",
-          email: "rz@gmail.com",
+          name: 'Raza',
+          email: 'rz@gmail.com',
         },
       ],
     };
@@ -155,29 +155,29 @@ export default {
         this.reason
       ) {
         if (this.totalDays < this.remaining) {
-          createToast("Request Has Been Sent to EM!", {
-            type: "success",
-            position: "top-right",
+          createToast('Request Has Been Sent to EM!', {
+            type: 'success',
+            position: 'top-right',
             showIcon: true,
             timeout: 10000,
-            transition: "bounce",
+            transition: 'bounce',
           });
         } else {
-          createToast("Selected Days are greater than Remaining Leaves", {
-            type: "danger",
-            position: "top-right",
+          createToast('Selected Days are greater than Remaining Leaves', {
+            type: 'danger',
+            position: 'top-right',
             showIcon: true,
             timeout: 10000,
-            transition: "bounce",
+            transition: 'bounce',
           });
         }
       } else {
-        createToast("All Fields are Required!!!", {
-          type: "danger",
-          position: "top-right",
+        createToast('All Fields are Required!!!', {
+          type: 'danger',
+          position: 'top-right',
           showIcon: true,
           timeout: 10000,
-          transition: "bounce",
+          transition: 'bounce',
         });
       }
     },
@@ -196,14 +196,14 @@ export default {
       if (diff > 0) {
         this.totalDays = diff;
       } else {
-        this.endDate = "";
-        this.totalDays = "";
-        createToast("Selected Date is Less Than Start Date", {
-          type: "danger",
-          position: "top-right",
+        this.endDate = '';
+        this.totalDays = '';
+        createToast('Selected Date is Less Than Start Date', {
+          type: 'danger',
+          position: 'top-right',
           showIcon: true,
           timeout: 10000,
-          transition: "bounce",
+          transition: 'bounce',
         });
       }
     },

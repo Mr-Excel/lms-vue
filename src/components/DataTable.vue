@@ -24,7 +24,7 @@
             {{ j }}
           </td>
           <td>
-            <router-link :to="`/leaves/single/${i.id}`">
+            <router-link :to="`${path + i.id}`">
               <span class="material-icons-outlined hover">
                 edit
               </span>
@@ -67,6 +67,10 @@ export default {
   props: {
     columns: Array,
     rows: Array,
+    path: {
+      type: String,
+      default: '/leaves/single/',
+    },
   },
   mounted() {
     this.col = this.columns;
@@ -86,12 +90,12 @@ export default {
       page: 0,
       c_page: 0,
       showData: [],
-      perPage: 9,
+      perPage: 10,
       col: [],
       row: [],
       si: 0,
       ei: 0,
-      search: "",
+      search: '',
     };
   },
   methods: {

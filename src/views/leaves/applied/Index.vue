@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import MenuIcon from "@/components/Icon";
+import MenuIcon from '@/components/Icon';
 
 export default {
   components: {
@@ -11,17 +11,18 @@ export default {
   },
   data() {
     return {
+      resolveMode: false,
       datax: [],
     };
   },
-  mounted() {
-    this.datax = this.getYears();
-    console.log(this.datax);
+  beforeMount() {
+    this.getYears();
   },
+  mounted() {},
   methods: {
     getYears() {
       const dt_ = [];
-      const session_date = sessionStorage.getItem("reg_date");
+      const session_date = sessionStorage.getItem('reg_date');
       const date = new Date(session_date);
       const now = new Date();
       const reg_year = date.getFullYear();
@@ -29,13 +30,13 @@ export default {
       for (let i = reg_year; i <= c_year; i++) {
         const arr = {
           path: `/leaves/applied/${i}`,
-          icon: "folder",
-          name: `Applied Leaves ${i}`,
+          icon: 'folder',
+          name: `${i}`,
           pop: false,
         };
         dt_.unshift(arr);
       }
-      return dt_;
+      this.datax = dt_;
     },
   },
 };
