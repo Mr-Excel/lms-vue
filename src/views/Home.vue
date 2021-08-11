@@ -34,12 +34,6 @@ export default {
           name: "Password Change",
           pop: false,
         },
-        {
-          path: "/settings",
-          icon: "settings",
-          name: "Settings",
-          pop: false,
-        },
       ],
     };
   },
