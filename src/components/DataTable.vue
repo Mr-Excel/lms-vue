@@ -63,14 +63,12 @@
 </template>
 
 <script>
+import { AppliedLeaves } from '@/api.js';
 export default {
   props: {
     columns: Array,
     rows: {
       type: Array,
-      default: () => {
-        return ['company'];
-      },
     },
     path: {
       type: String,
@@ -78,8 +76,14 @@ export default {
     },
     type: Number,
   },
-  mounted() {
-    console.log(this.rows);
+
+  async mounted() {
+    if (this.type == 1) {
+      this.row = await this.getData();
+    }
+    // const token = sessionStorage.getItem('token');
+    // this.row = await AppliedLeaves(this.$route.params.year, token);
+
     this.col = this.columns;
     this.row = this.rows;
     var items = this.row.slice(0, this.perPage).map((i) => {
@@ -91,6 +95,7 @@ export default {
     const pages = Math.ceil(_p);
     this.page = pages;
     this.c_page = 1;
+    console.log(this.row);
   },
   data() {
     return {
@@ -106,6 +111,35 @@ export default {
     };
   },
   methods: {
+    async getData() {
+      const token = sessionStorage.getItem('token');
+      const res = await AppliedLeaves(this.$route.params.year, token);
+      const arr = [];
+      for (let i = 0; i < res.data.length; i++) {
+        const obj = {
+          id: res.data[i]._id,
+          leaveType: res.data[i].leave_type,
+          startDate: res.data[i].start_date,
+          endDate: res.data[i].end_date,
+          status: res.data[i].leave_Status,
+          type: res.data[i].paid_type,
+          leaves: res.data[i].total_days,
+        };
+        arr.push(obj);
+      }
+      return arr;
+      // this.col = this.columns;
+      // this.row = arr;
+      // var items = this.row.slice(0, this.perPage).map((i) => {
+      //   return i;
+      // });
+      // this.showData = items;
+      // this.ei = this.perPage;
+      // const _p = this.row.length / this.perPage;
+      // const pages = Math.ceil(_p);
+      // this.page = pages;
+      // this.c_page = 1;
+    },
     first() {
       this.c_page = 1;
       this.si = 0;
@@ -138,6 +172,7 @@ export default {
       }
     },
     next() {
+      console.log(this.row);
       if (this.ei < this.row.length) {
         this.c_page = this.c_page + 1;
         const s = this.si + this.perPage;

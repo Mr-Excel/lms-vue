@@ -1,7 +1,4 @@
 <template>
-  {{ xrow }}
-  <br />
-  {{ getXrow }}
   <div class="container">
     <div class="row">
       <div class="col center">
@@ -12,7 +9,7 @@
             </span>
           </button>
           <div style="padding-top: 60px;">
-            <DataTable :rows="getXrow" :columns="xcol" />
+            <DataTable :type="1" :columns="xcol" />
           </div>
         </div>
         <div v-else>
@@ -29,7 +26,6 @@
 </template>
 
 <script>
-import { AppliedLeaves } from '@/api.js';
 import DataTable from '@/components/DataTable';
 const jsonexport = require('jsonexport');
 
@@ -38,7 +34,6 @@ export default {
   data() {
     return {
       isRecord: true,
-      xrow: [],
       xcol: [
         {
           field: 'id',
@@ -74,24 +69,6 @@ export default {
   },
 
   methods: {
-    async getData() {
-      const token = sessionStorage.getItem('token');
-      const res = await AppliedLeaves(this.$route.params.year, token);
-      const arr = [];
-      for (let i = 0; i < res.data.length; i++) {
-        const obj = {
-          id: res.data[i]._id,
-          leaveType: res.data[i].leave_type,
-          startDate: res.data[i].start_date,
-          endDate: res.data[i].end_date,
-          status: res.data[i].leave_Status,
-          type: res.data[i].paid_type,
-          leaves: res.data[i].total_days,
-        };
-        arr.push(obj);
-      }
-      this.xrow = arr;
-    },
     download() {
       this.DownloadJSON2CSV(this.xrow);
       // this.csv(this.xrow);
@@ -118,14 +95,6 @@ export default {
 
       document.body.removeChild(element);
     },
-  },
-  computed: {
-    getXrow() {
-      return this.xrow;
-    },
-  },
-  mounted() {
-    this.getData();
   },
   components: {
     DataTable,
