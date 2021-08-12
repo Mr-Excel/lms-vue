@@ -116,7 +116,7 @@ export default {
   },
   data() {
     return {
-      remainingLeaves: 1,
+      remainingLeaves: 0,
       startDate: '',
       endDate: '',
       totalDays: '',

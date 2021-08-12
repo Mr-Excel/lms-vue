@@ -63,29 +63,29 @@
 </template>
 
 <script>
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 export default {
   props: {},
   data() {
     return {
-      effect: "",
+      effect: '',
       show: false,
       notifSHow: false,
       home: false,
       featuresOpen: false,
-      redirect: "",
-      name: "",
-      role: "",
+      redirect: '',
+      name: '',
+      role: '',
     };
   },
   watch: {
     $route(to) {
       const this_ = this;
       const toPage = to;
-      document.title = toPage.name + " | HRMS";
+      document.title = toPage.name + ' | HRMS';
       const path = toPage.path;
-      if (path !== "/") {
+      if (path !== '/') {
         this.home = true;
       } else {
         this.home = false;
@@ -93,33 +93,38 @@ export default {
       const name_ = toPage.name;
       this.redirect = path;
       this.name = name_;
-      const token = sessionStorage.getItem("token");
+      const token = sessionStorage.getItem('token');
+
       if (token !== null) {
         jwt.verify(token, process.env.VUE_APP_BE_JWT_SECRET, function(
           err,
           decoded
         ) {
           if (decoded !== undefined) {
-            sessionStorage.setItem("role", decoded.user.role);
-            if (path == "/login") {
-              this_.$router.push("/");
+            sessionStorage.setItem('role', decoded.user.role);
+            sessionStorage.setItem('reg_date', decoded.user.reg_date);
+            sessionStorage.setItem('team', decoded.user.team);
+            if (path == '/login') {
+              this_.$router.push('/');
             }
           } else {
-            this_.$router.push("/login");
+            this_.$router.push('/login');
           }
         });
+      } else {
+        this_.$router.push('/login');
       }
     },
   },
   methods: {
     logout() {
-      sessionStorage.setItem("token", null);
-      this.$router.push("/login");
+      sessionStorage.setItem('token', null);
+      this.$router.push('/login');
     },
     createRipple(e) {
-      e.target.classList.add("ripple");
+      e.target.classList.add('ripple');
       setTimeout(() => {
-        e.target.classList.remove("ripple");
+        e.target.classList.remove('ripple');
       }, 100);
     },
   },

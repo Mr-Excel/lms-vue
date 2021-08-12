@@ -1,4 +1,7 @@
 <template>
+  {{ xrow }}
+  <br />
+  {{ getXrow }}
   <div class="container">
     <div class="row">
       <div class="col center">
@@ -9,7 +12,7 @@
             </span>
           </button>
           <div style="padding-top: 60px;">
-            <DataTable :rows="xrow" :columns="xcol" />
+            <DataTable :rows="getXrow" :columns="xcol" />
           </div>
         </div>
         <div v-else>
@@ -26,217 +29,16 @@
 </template>
 
 <script>
+import { AppliedLeaves } from '@/api.js';
 import DataTable from '@/components/DataTable';
 const jsonexport = require('jsonexport');
 
 export default {
   name: 'Applied Leaves',
-  components: {
-    DataTable,
-  },
   data() {
     return {
       isRecord: true,
-      xrow: [
-        {
-          id: 1,
-          leaveType: 'Sick',
-          startDate: '4/8/2020',
-          endDate: '4/11/2020',
-          status: 'Rejected',
-          type: 'Paid',
-          leaves: 3,
-        },
-        {
-          id: 2,
-          leaveType: 'Casual',
-          startDate: '7/4/2020',
-          endDate: '7/9/2020',
-          status: 'Rejected',
-          type: 'Paid',
-          leaves: 5,
-        },
-        {
-          id: 3,
-          leaveType: 'Casual',
-          startDate: '6/26/2020',
-          endDate: '7/1/2020',
-          status: 'Approved',
-          type: 'Unpaid',
-          leaves: 5,
-        },
-        {
-          id: 4,
-          leaveType: 'Sick',
-          startDate: '4/24/2021',
-          endDate: '4/26/2021',
-          status: 'Rejected',
-          type: 'Unpaid',
-          leaves: 2,
-        },
-        {
-          id: 5,
-          leaveType: 'Annual',
-          startDate: '10/8/2020',
-          endDate: '10/12/2020',
-          status: 'Rejected',
-          type: 'Paid',
-          leaves: 4,
-        },
-        {
-          id: 6,
-          leaveType: 'Annual',
-          startDate: '7/24/2020',
-          endDate: '7/25/2020',
-          status: 'Approved',
-          type: 'Paid',
-          leaves: 1,
-        },
-        {
-          id: 7,
-          leaveType: 'Sick',
-          startDate: '5/6/2021',
-          endDate: '5/7/2021',
-          status: 'Pending',
-          type: 'Paid',
-          leaves: 1,
-        },
-        {
-          id: 8,
-          leaveType: 'Casual',
-          startDate: '4/16/2021',
-          endDate: '4/19/2021',
-          status: 'Pending',
-          type: 'Unpaid',
-          leaves: 3,
-        },
-        {
-          id: 9,
-          leaveType: 'Annual',
-          startDate: '4/8/2021',
-          endDate: '4/9/2021',
-          status: 'Approved',
-          type: 'Paid',
-          leaves: 1,
-        },
-        {
-          id: 10,
-          leaveType: 'Annual',
-          startDate: '8/17/2020',
-          endDate: '8/19/2020',
-          status: 'Approved',
-          type: 'Unpaid',
-          leaves: 2,
-        },
-        {
-          id: 11,
-          leaveType: 'Annual',
-          startDate: '5/28/2020',
-          endDate: '5/30/2020',
-          status: 'Pending',
-          type: 'Paid',
-          leaves: 2,
-        },
-        {
-          id: 12,
-          leaveType: 'Casual',
-          startDate: '4/4/2020',
-          endDate: '4/5/2020',
-          status: 'Approved',
-          type: 'Paid',
-          leaves: 1,
-        },
-        {
-          id: 13,
-          leaveType: 'Sick',
-          startDate: '2/5/2021',
-          endDate: '2/10/2021',
-          status: 'Approved',
-          type: 'Paid',
-          leaves: 5,
-        },
-        {
-          id: 14,
-          leaveType: 'Annual',
-          startDate: '12/20/2020',
-          endDate: '12/24/2020',
-          status: 'Rejected',
-          type: 'Paid',
-          leaves: 4,
-        },
-        {
-          id: 15,
-          leaveType: 'Sick',
-          startDate: '7/27/2020',
-          endDate: '8/1/2020',
-          status: 'Approved',
-          type: 'Unpaid',
-          leaves: 5,
-        },
-        {
-          id: 16,
-          leaveType: 'Casual',
-          startDate: '6/1/2021',
-          endDate: '6/4/2021',
-          status: 'Rejected',
-          type: 'Unpaid',
-          leaves: 3,
-        },
-        {
-          id: 17,
-          leaveType: 'Sick',
-          startDate: '9/7/2020',
-          endDate: '9/10/2020',
-          status: 'Rejected',
-          type: 'Unpaid',
-          leaves: 3,
-        },
-        {
-          id: 18,
-          leaveType: 'Casual',
-          startDate: '1/1/2021',
-          endDate: '1/6/2021',
-          status: 'Pending',
-          type: 'Unpaid',
-          leaves: 5,
-        },
-        {
-          id: 19,
-          leaveType: 'Casual',
-          startDate: '2/12/2021',
-          endDate: '2/15/2021',
-          status: 'Rejected',
-          type: 'Unpaid',
-          leaves: 3,
-        },
-        {
-          id: 20,
-          leaveType: 'Sick',
-          startDate: '4/1/2020',
-          endDate: '4/2/2020',
-          status: 'Pending',
-          type: 'Unpaid',
-          leaves: 1,
-        },
-        {
-          id: 21,
-          leaveType: 'Sick',
-          startDate: '7/24/2020',
-          endDate: '7/28/2020',
-          status: 'Pending',
-          type: 'Unpaid',
-          leaves: 4,
-        },
-        {
-          id: 22,
-          leaveType: 'Annual',
-          startDate: '4/1/2021',
-          endDate: '4/2/2021',
-          status: 'Approved',
-          type: 'Unpaid',
-          leaves: 1,
-        },
-      ],
+      xrow: [],
       xcol: [
         {
           field: 'id',
@@ -270,7 +72,26 @@ export default {
       str: '',
     };
   },
+
   methods: {
+    async getData() {
+      const token = sessionStorage.getItem('token');
+      const res = await AppliedLeaves(this.$route.params.year, token);
+      const arr = [];
+      for (let i = 0; i < res.data.length; i++) {
+        const obj = {
+          id: res.data[i]._id,
+          leaveType: res.data[i].leave_type,
+          startDate: res.data[i].start_date,
+          endDate: res.data[i].end_date,
+          status: res.data[i].leave_Status,
+          type: res.data[i].paid_type,
+          leaves: res.data[i].total_days,
+        };
+        arr.push(obj);
+      }
+      this.xrow = arr;
+    },
     download() {
       this.DownloadJSON2CSV(this.xrow);
       // this.csv(this.xrow);
@@ -297,6 +118,17 @@ export default {
 
       document.body.removeChild(element);
     },
+  },
+  computed: {
+    getXrow() {
+      return this.xrow;
+    },
+  },
+  mounted() {
+    this.getData();
+  },
+  components: {
+    DataTable,
   },
 };
 </script>

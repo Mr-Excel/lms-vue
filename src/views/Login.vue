@@ -52,16 +52,16 @@
 </template>
 
 <script>
-import { Login } from "@/api.js";
+import { Login } from '@/api.js';
 // import the library
-import { createToast } from "mosha-vue-toastify";
+import { createToast } from 'mosha-vue-toastify';
 // import the styling for the toast
-import "mosha-vue-toastify/dist/style.css";
+import 'mosha-vue-toastify/dist/style.css';
 export default {
   data() {
     return {
-      pass: "",
-      email: "",
+      pass: '',
+      email: '',
       active: false,
     };
   },
@@ -72,34 +72,33 @@ export default {
       if (this.email && this.pass) {
         const res = await Login(this.email, this.pass);
         if (res.data.token !== undefined) {
-          sessionStorage.setItem("token", res.data.token);
-          sessionStorage.setItem("reg_date", "2020-07-13");
-          this.$router.push("/");
-          createToast("Welcome Sendoso LMS", {
-            type: "success",
-            position: "top-right",
+          sessionStorage.setItem('token', res.data.token);
+          this.$router.push('/');
+          createToast('Welcome Sendoso LMS', {
+            type: 'success',
+            position: 'top-right',
             showIcon: true,
             timeout: 10000,
-            transition: "bounce",
+            transition: 'bounce',
           });
           this.active = false;
         } else {
-          createToast("Wrong Credentials!!!", {
-            type: "danger",
-            position: "top-right",
+          createToast('Wrong Credentials!!!', {
+            type: 'danger',
+            position: 'top-right',
             showIcon: true,
             timeout: 10000,
-            transition: "bounce",
+            transition: 'bounce',
           });
           this.active = false;
         }
       } else {
-        createToast("Please Enter Inputs!!!", {
-          type: "danger",
-          position: "top-right",
+        createToast('Please Enter Inputs!!!', {
+          type: 'danger',
+          position: 'top-right',
           showIcon: true,
           timeout: 10000,
-          transition: "bounce",
+          transition: 'bounce',
         });
         this.active = false;
       }

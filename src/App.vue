@@ -17,7 +17,7 @@ export default {
       ctrlDown: false,
       ctrlKey: 17,
       nKey: 78,
-      bksKey: 8,
+      bksKey: 66,
     };
   },
   created() {
@@ -28,12 +28,12 @@ export default {
       if (!this.ctrlDown) {
         if (k == this.ctrlKey) {
           this.ctrlDown = true;
-        } else if (k === 8) {
-          this.$router.go(-1);
         }
       } else {
         if (k == this.nKey) {
           this.$router.push('/leaves/new');
+        } else if (k == this.bksKey) {
+          this.$router.go(-1);
         } else {
           this.ctrlDown = false;
         }
@@ -128,7 +128,8 @@ a:hover {
 }
 .table-responsive {
   overflow-x: auto;
-  overflow: hidden;
+  overflow: auto;
+  height: 800px;
 }
 @import '~bootstrap/dist/css/bootstrap.css';
 </style>

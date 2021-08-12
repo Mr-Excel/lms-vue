@@ -66,13 +66,20 @@
 export default {
   props: {
     columns: Array,
-    rows: Array,
+    rows: {
+      type: Array,
+      default: () => {
+        return ['company'];
+      },
+    },
     path: {
       type: String,
       default: '/leaves/single/',
     },
+    type: Number,
   },
   mounted() {
+    console.log(this.rows);
     this.col = this.columns;
     this.row = this.rows;
     var items = this.row.slice(0, this.perPage).map((i) => {

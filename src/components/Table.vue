@@ -47,7 +47,7 @@
                   {{ i.team }}
                 </div>
                 <div class="text-info">
-                  {{ i.isActive == 1 ? "Active" : "Deactivateds" }}
+                  {{ i.isActive == 1 ? 'Active' : 'Deactivateds' }}
                 </div>
               </div>
             </div>
@@ -60,76 +60,76 @@
 
 <script>
 export default {
-  name: "AllEmp",
+  name: 'AllEmp',
   data() {
     return {
-      search: "",
-      titles: ["ID", "Full Name", "Email", "Team", "Status", "Modify"],
+      search: '',
+      titles: ['ID', 'Full Name', 'Email', 'Team', 'Status', 'Modify'],
       data: [
         {
           id: 1,
-          name: "ahmad",
-          email: "ahmad.raza@sendoso.com",
-          team: "PLG",
+          name: 'ahmad',
+          email: 'ahmad.raza@sendoso.com',
+          team: 'PLG',
           isActive: 1,
         },
         {
           id: 2,
-          name: "ahmad",
-          email: "asad.ali@sendoso.com",
-          team: "PLG",
+          name: 'ahmad',
+          email: 'asad.ali@sendoso.com',
+          team: 'PLG',
           isActive: 1,
         },
         {
           id: 3,
-          name: "ahmad",
-          email: "saad.ali@sendoso.com",
-          team: "PLG",
+          name: 'ahmad',
+          email: 'saad.ali@sendoso.com',
+          team: 'PLG',
           isActive: 1,
         },
         {
           id: 4,
-          name: "ahmad",
-          email: "muhammad.hammad@sendoso.com",
-          team: "PLG",
+          name: 'ahmad',
+          email: 'muhammad.hammad@sendoso.com',
+          team: 'PLG',
           isActive: 1,
         },
         {
           id: 5,
-          name: "ahmad",
-          email: "nawaz.bop@sendoso.com",
-          team: "PLG",
+          name: 'ahmad',
+          email: 'nawaz.bop@sendoso.com',
+          team: 'PLG',
           isActive: 1,
         },
         {
           id: 6,
-          name: "ahmad",
-          email: "ahmad.raza@sendoso.com",
-          team: "PLG",
+          name: 'ahmad',
+          email: 'ahmad.raza@sendoso.com',
+          team: 'PLG',
           isActive: 1,
         },
         {
           id: 7,
-          name: "ahmad",
-          email: "ahmad.raza@sendoso.com",
-          team: "PLG",
+          name: 'ahmad',
+          email: 'ahmad.raza@sendoso.com',
+          team: 'PLG',
           isActive: 1,
         },
         {
           id: 8,
-          name: "ahmad Raza",
-          email: "ahmad.raza@sendoso.com",
-          team: "PLG",
+          name: 'ahmad Raza',
+          email: 'ahmad.raza@sendoso.com',
+          team: 'PLG',
           isActive: 1,
         },
       ],
       data_: [],
       cols: [
-        "linear-gradient(90deg,rgba(63, 94, 251, 1) 0%,rgba(252, 70, 107, 1) 90%)",
-        "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 90%)",
-        "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,79,121,1) 35%, rgba(0,212,255,1) 90%)",
-        "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 90%)",
-        "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 90%)",
+        'linear-gradient(90deg,rgba(63, 94, 251, 1) 0%,rgba(252, 70, 107, 1) 90%)',
+        'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 90%)',
+        'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,79,121,1) 35%, rgba(0,212,255,1) 90%)',
+        'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 90%)',
+        'radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 90%)',
       ],
     };
   },
@@ -147,9 +147,9 @@ export default {
       return this.cols[random];
     },
     letters(letters) {
-      const split = letters.split(" ");
+      const split = letters.split(' ');
       let first = split[0][0];
-      let second = "";
+      let second = '';
       if (split[1]) {
         second = split[1][0];
       }
@@ -157,7 +157,7 @@ export default {
       return combine;
     },
     clearme() {
-      this.search = "";
+      this.search = '';
       this.data_ = this.data;
     },
     searchFunc() {
