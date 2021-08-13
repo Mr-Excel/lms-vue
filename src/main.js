@@ -7,7 +7,6 @@ import ShaplaSpinner from "@shapla/vue-spinner";
 import "bootstrap";
 import "material-icons/iconfont/material-icons.css";
 import "@shapla/vue-spinner/dist/style.css";
-
 // import es from "vue3-easy-table/src/lang/es";
 
 import titleMixin from "./mixin";

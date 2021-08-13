@@ -83,18 +83,14 @@
         <div class="col">
           <div class="inputForm">
             <label for="em">Select Relative Manager</label>
-            <select
-              :disabled="disabled == 0"
+            <input
+              type="number"
+              v-model="em"
               name="em"
               id="em"
-              v-model="em"
-              @change="onSelect"
-            >
-              <option value="0">----------</option>
-              <option :value="i.email" v-for="i in emData" :key="i">{{
-                i.email
-              }}</option>
-            </select>
+              placeholder=""
+              disabled
+            />
           </div>
         </div>
         <div class="col"></div>
@@ -131,19 +127,45 @@
 </template>
 
 <script>
+import { SingleLeaves, RemainingLeaves } from "@/api.js";
 // import the library
-import { VueEditor } from 'vue3-editor';
-import { createToast } from 'mosha-vue-toastify';
+import { VueEditor } from "vue3-editor";
+import { createToast } from "mosha-vue-toastify";
 // import the styling for the toast
-import 'mosha-vue-toastify/dist/style.css';
+import "mosha-vue-toastify/dist/style.css";
 
 export default {
   components: {
     VueEditor,
   },
-  mounted() {
-    this.get();
-    if (this.status == 'Pending') {
+  async mounted() {
+    const x = await SingleLeaves(this.id);
+    const dt = x.data[0];
+    const res = {
+      startDate: dt.start_date,
+      endDate: dt.end_date,
+      totalDays: dt.total_days,
+      reason: dt.reason,
+      em: dt.manager,
+      status: dt.leave_Status,
+    };
+    const sd = new Date(res.startDate);
+    const sd_date = ("0" + sd.getDate()).slice(-2);
+    const sd_month = ("0" + (sd.getMonth() + 1)).slice(-2);
+    const ed = new Date(res.endDate);
+    const ed_date = ("0" + ed.getDate()).slice(-2);
+    const ed_month = ("0" + (ed.getMonth() + 1)).slice(-2);
+    this.startDate = sd.getFullYear() + "-" + sd_month + "-" + sd_date;
+    this.endDate = ed.getFullYear() + "-" + ed_month + "-" + ed_date;
+    this.totalDays = res.totalDays;
+    this.reason = res.reason;
+    this.status = res.status;
+    this.em = res.em;
+    const token = sessionStorage.getItem("token");
+    const date = new Date();
+    const rem = await RemainingLeaves(date.getFullYear(), token);
+    this.remaining = rem.data.remaining;
+    if (this.status == "Pending") {
       this.disabled = 1;
     } else {
       this.disabled = 0;
@@ -152,38 +174,26 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      startDate: '',
-      endDate: '',
-      totalDays: '',
-      disabled: '',
-      remaining: 15,
-      status: '',
-      reason: '',
-      em: '-------',
-      emData: [
-        {
-          id: 1,
-          name: 'Ahmad',
-          email: 'xyz@gmail.com',
-        },
-        {
-          id: 2,
-          name: 'Raza',
-          email: 'rz@gmail.com',
-        },
-      ],
+      startDate: "",
+      endDate: "",
+      totalDays: "",
+      disabled: "",
+      remaining: 0,
+      status: "",
+      reason: "",
+      em: "",
     };
   },
   methods: {
     async get() {
       const res = {
         id: this.$route.params.id,
-        startDate: '2021-08-01',
-        endDate: '2021-08-07',
+        startDate: "2021-08-01",
+        endDate: "2021-08-07",
         totalDays: 7,
-        reason: 'No Reason',
-        em: 'xyz@gmail.com',
-        status: 'Pending',
+        reason: "No Reason",
+        em: "xyz@gmail.com",
+        status: "Pending",
       };
       this.startDate = res.startDate;
       this.endDate = res.endDate;
@@ -201,29 +211,29 @@ export default {
         this.reason
       ) {
         if (this.totalDays < this.remaining) {
-          createToast('Request Has Been Sent to EM!', {
-            type: 'success',
-            position: 'top-right',
+          createToast("Request Has Been Sent to EM!", {
+            type: "success",
+            position: "top-right",
             showIcon: true,
             timeout: 10000,
-            transition: 'bounce',
+            transition: "bounce",
           });
         } else {
-          createToast('Selected Days are greater than Remaining Leaves', {
-            type: 'danger',
-            position: 'top-right',
+          createToast("Selected Days are greater than Remaining Leaves", {
+            type: "danger",
+            position: "top-right",
             showIcon: true,
             timeout: 10000,
-            transition: 'bounce',
+            transition: "bounce",
           });
         }
       } else {
-        createToast('All Fields are Required!!!', {
-          type: 'danger',
-          position: 'top-right',
+        createToast("All Fields are Required!!!", {
+          type: "danger",
+          position: "top-right",
           showIcon: true,
           timeout: 10000,
-          transition: 'bounce',
+          transition: "bounce",
         });
       }
     },
@@ -242,14 +252,14 @@ export default {
       if (diff > 0) {
         this.totalDays = diff;
       } else {
-        this.endDate = '';
-        this.totalDays = '';
-        createToast('Selected Date is Less Than Start Date', {
-          type: 'danger',
-          position: 'top-right',
+        this.endDate = "";
+        this.totalDays = "";
+        createToast("Selected Date is Less Than Start Date", {
+          type: "danger",
+          position: "top-right",
           showIcon: true,
           timeout: 10000,
-          transition: 'bounce',
+          transition: "bounce",
         });
       }
     },
